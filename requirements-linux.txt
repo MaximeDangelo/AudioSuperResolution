@@ -1,0 +1,18 @@
+# PyTorch ROCm (AMD RX 6800 sous Linux)
+# Installer d'abord : pip install torch torchaudio --index-url https://download.pytorch.org/whl/rocm6.2
+torch
+torchaudio
+numpy
+soundfile
+scipy
+matplotlib
+datasets
+librosa
+tqdm
+voicefixer
+demucs
+pystoi
+mir_eval
+pesq
+pyarrow
+speechbrain

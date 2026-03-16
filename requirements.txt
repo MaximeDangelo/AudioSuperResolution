@@ -1,0 +1,15 @@
+torch
+torchaudio
+numpy
+soundfile
+scipy
+matplotlib
+datasets
+librosa
+tqdm
+voicefixer
+demucs
+torch-directml
+pystoi
+mir_eval
+pesq

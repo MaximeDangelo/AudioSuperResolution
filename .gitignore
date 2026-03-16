@@ -1,0 +1,34 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Dataset (trop volumineux)
+dataset/
+Dataset Radio (2)/
+
+# Modeles et checkpoints
+checkpoints/
+pretrained_models/
+*.pt
+*.pth
+
+# Outputs
+output/
+logs/
+
+# Package portable
+portable_package/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.ogg
+*.wav
