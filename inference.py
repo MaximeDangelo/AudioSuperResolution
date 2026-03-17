@@ -2,10 +2,13 @@
 Inference : applique le pipeline hybride complet sur des fichiers audio.
 
 Pipeline :
-  1. Demucs OU SepFormer (debruitage, SpeechBrain)
-  2. VoiceFixer (super-resolution pre-entraine)
-  3. SpectralResUNet (fine-tune radio, optionnel si checkpoint disponible)
+  1. Demucs (debruitage waveform, 100% denoise)
+  2. Resample 44.1 kHz
+  3. SpectralResUNet (fine-tune radio : denoise spectral + reconstruction HF)
   4. MetricGAN+ (polissage PESQ, SpeechBrain, optionnel)
+
+Note : VoiceFixer a ete retire du pipeline car il degradait
+les signaux radio (ecrasement des frequences, artefacts vocaux).
 
 Peut traiter :
 - Les fichiers OGG du projet original (../New/DatasetRadioCom/)
@@ -46,17 +49,19 @@ CHECKPOINT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoin
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
 
 INPUT_FILES = [
-    os.path.join("..", "New", "DatasetRadioCom", "Dataset Radio (3).ogg"),
+    os.path.join("Dataset Radio (2)", "01__kwahmah_atc001.flac"),
+    os.path.join("Dataset Radio (2)", "07-wahmah_heathrow-air-traffic-control.flac"),
+    os.path.join("Dataset Radio (2)", "08__kwahmah_hong-kong-air-traffic-control.flac"),
 ]
 
 # Pipeline : activer/desactiver les etapes
 DENOISE_ENGINE = "demucs"  # "demucs" | "sepformer" | "none"
-USE_VOICEFIXER = True
+USE_VOICEFIXER = False
 USE_FINETUNE = True  # Utilise le modele fine-tune si disponible
-USE_METRICGAN = True  # Polissage final MetricGAN+ (optimise PESQ)
+USE_METRICGAN = True  # Polissage PESQ (bug speechbrain/huggingface_hub corrige)
 
 # Demucs
-DEMUCS_DRY_WET = 0.5
+DEMUCS_DRY_WET = 0.0  # 100% Demucs, 0% original
 DEMUCS_MODEL = "htdemucs"
 
 # SepFormer (alternative a Demucs)
@@ -71,7 +76,7 @@ METRICGAN_SAVEDIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pr
 VOICEFIXER_MODE = 0
 
 # Dry/wet mix pour le debruitage (Demucs ou SepFormer)
-DENOISE_DRY_WET = 0.5
+DENOISE_DRY_WET = 0.0  # 100% denoise
 
 # Duree max pour test rapide (None = tout le fichier)
 MAX_DURATION_S = 120
@@ -274,11 +279,21 @@ def polish_metricgan(data, sr):
 
     print("    MetricGAN+ en cours...")
     if _metricgan_model is None:
-        _metricgan_model = SpectralMaskEnhancement.from_hparams(
-            source=METRICGAN_MODEL,
-            savedir=METRICGAN_SAVEDIR,
-            run_opts={"device": str(DEVICE)},
-        )
+        # Patch: huggingface_hub >= 0.24 a supprime use_auth_token
+        import huggingface_hub
+        _orig_download = huggingface_hub.hf_hub_download
+        def _patched_download(*args, **kwargs):
+            kwargs.pop("use_auth_token", None)
+            return _orig_download(*args, **kwargs)
+        huggingface_hub.hf_hub_download = _patched_download
+        try:
+            _metricgan_model = SpectralMaskEnhancement.from_hparams(
+                source=METRICGAN_MODEL,
+                savedir=METRICGAN_SAVEDIR,
+                run_opts={"device": str(DEVICE)},
+            )
+        finally:
+            huggingface_hub.hf_hub_download = _orig_download
 
     # MetricGAN+ travaille a 16kHz
     target_sr = 16000
@@ -471,7 +486,7 @@ def main():
     finetune_model = None
     if USE_FINETUNE and os.path.exists(CHECKPOINT):
         finetune_model = SpectralResUNet().to(DEVICE)
-        ckpt = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
+        ckpt = torch.load(CHECKPOINT, map_location="cpu", weights_only=False)
         finetune_model.load_state_dict(ckpt["model_state_dict"])
         finetune_model.eval()
         print(f"  Fine-tune: ON (epoch {ckpt['epoch']}, val_loss={ckpt['val_loss']:.4f})")
@@ -665,7 +680,7 @@ if __name__ == "__main__":
     # Evaluation sur le dataset de validation si le modele est disponible
     if os.path.exists(CHECKPOINT):
         model = SpectralResUNet().to(DEVICE)
-        ckpt = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
+        ckpt = torch.load(CHECKPOINT, map_location="cpu", weights_only=False)
         model.load_state_dict(ckpt["model_state_dict"])
         model.eval()
         evaluate_on_validation(model, DEVICE, n_samples=20)

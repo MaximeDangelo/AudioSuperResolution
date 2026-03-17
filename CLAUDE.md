@@ -3,10 +3,11 @@
 ## Description du projet
 
 Projet d'**hyper-resolution audio** pour des enregistrements de communications radio (aviation/militaire). Pipeline hybride combinant :
-1. **Demucs** (Facebook) ou **SepFormer** (SpeechBrain) pour le debruitage waveform
-2. **VoiceFixer** pour la super-resolution pre-entrainee (sortie 44.1 kHz)
-3. **SpectralResUNet** (custom) fine-tune sur des degradations radio synthetiques
-4. **MetricGAN+** (SpeechBrain) pour le polissage final optimise PESQ (optionnel)
+1. **Demucs** (Facebook) pour le debruitage waveform (100%, sans dry/wet)
+2. **SpectralResUNet** (custom) fine-tune sur des degradations radio synthetiques (denoise spectral + reconstruction HF)
+3. **MetricGAN+** (SpeechBrain) pour le polissage final optimise PESQ (optionnel)
+
+Note : VoiceFixer a ete teste et retire du pipeline (degradait les signaux radio : ecrasement des frequences, artefacts vocaux).
 
 Spin-off du pipeline de debruitage situe dans `../New/` (qui utilise aussi Demucs + Whisper).
 
@@ -22,44 +23,41 @@ Note : DeepFilterNet a ete teste et abandonne (degrade l'intelligibilite sur sig
 
 ## Architecture
 
-### Pipeline d'inference (`pipeline.py` ou `inference.py`)
+### Pipeline d'inference (`inference.py`)
 
 ```
-OGG Radio -> [Demucs OU SepFormer] (denoise dry/wet 50%) -> VoiceFixer (SR 44.1kHz) -> [SpectralResUNet] -> [MetricGAN+] -> WAV 44.1kHz
+Radio (OGG/FLAC/MP3) -> Demucs (denoise 100%) -> resample 44.1kHz -> SpectralResUNet (denoise spectral + reconstruction HF) -> [MetricGAN+] -> WAV 44.1kHz
 ```
 
 ### Pipeline d'entrainement
 
 ```
-create_dataset.py -> train.py -> checkpoints/best_model.pt
+create_dataset.py (degradations radio + Demucs) -> train.py -> checkpoints/best_model.pt
 ```
+
+Le dataset d'entrainement applique Demucs sur les paires degradees pour que le SpectralResUNet apprenne a corriger la sortie de Demucs (pas le signal brut).
 
 ## Fichiers
 
 | Fichier | Role |
 |---------|------|
-| `pipeline.py` | Pipeline hybride complet (Demucs + VoiceFixer + KPIs) |
-| `create_dataset.py` | Generation dataset de paires (clean/degrade) a 44.1 kHz |
+| `pipeline.py` | Pipeline hybride initial (ancien, avec VoiceFixer) |
+| `create_dataset.py` | Generation dataset de paires (Demucs(degrade)/clean) a 44.1 kHz |
 | `train.py` | Entrainement du SpectralResUNet (fine-tuning) |
-| `inference.py` | Inference complete avec les 3 etapes |
-| `requirements.txt` | Dependances Python |
+| `inference.py` | Inference complete (Demucs + SpectralResUNet + MetricGAN+) |
+| `analyze_radio.py` | Analyse spectrale des fichiers radio reels |
+| `requirements.txt` | Dependances Python (Windows) |
+| `requirements-linux.txt` | Dependances Python (Linux/ROCm) |
+| `setup_linux.sh` | Script d'installation Linux avec ROCm |
 
 ## Execution
 
 ```bash
-# 1. Installer
-python -m venv venv
-venv\Scripts\pip install -r requirements.txt
-
-# 2. Test rapide (pipeline pre-entraine uniquement, pas de fine-tuning)
-venv\Scripts\python pipeline.py
-
-# 3. Pour le fine-tuning : generer le dataset puis entrainer
-venv\Scripts\python create_dataset.py
-venv\Scripts\python train.py
-
-# 4. Inference avec le modele fine-tune
-venv\Scripts\python inference.py
+# Linux (avec ROCm pour GPU AMD)
+source venv/bin/activate
+python create_dataset.py   # Generer le dataset (inclut Demucs)
+python train.py             # Entrainer le SpectralResUNet
+python inference.py         # Inference sur fichiers radio
 ```
 
 ## Modele SpectralResUNet
@@ -72,46 +70,52 @@ ResUNet operant dans le domaine STFT (spectrogramme) :
 - **Reconstruction** : masque * magnitude + HF, puis iSTFT avec phase originale
 - **Loss** : L1 + Multi-Resolution STFT Loss
 - **Optimizer** : AdamW + CosineAnnealing
+- **Early stopping** : patience 15 epochs sur val_loss
+- **Metriques** : PESQ, STOI toutes les 5 epochs
 
 ## Configuration
 
-**pipeline.py** :
+**inference.py** :
 - `DENOISE_ENGINE` : "demucs" | "sepformer" | "none"
-- `DENOISE_DRY_WET` : 0.5 (50/50 original/denoise)
-- `USE_METRICGAN` : True/False (polissage final PESQ)
-- `VOICEFIXER_MODE` : 0 (normal), 1 (speech), 2 (restauration)
+- `DEMUCS_DRY_WET` : 0.0 (100% Demucs)
+- `USE_VOICEFIXER` : False (retire du pipeline)
+- `USE_METRICGAN` : True (polissage final PESQ)
+- `USE_FINETUNE` : True (SpectralResUNet)
 - `MAX_DURATION_S` : 120s pour tests rapides
 
 **create_dataset.py** :
 - `TARGET_SR` : 44100 Hz
+- `APPLY_DEMUCS_TO_RAW` : True (applique Demucs aux paires degradees)
 - `N_TRAIN` / `N_VAL` : 5000 / 500
-- Degradations : bandpass, downsample, bruit blanc/rose, crackling, interference, clipping
+- Degradations : bandpass, downsample, bruit blanc/rose, crackling, interference, clipping, AGC, cockpit reverb, radio dropout
 
 **train.py** :
 - `BATCH_SIZE` : 8
 - `LEARNING_RATE` : 3e-4
 - `EPOCHS` : 80
 - `N_FFT` : 2048, `HOP_LENGTH` : 512
+- `EARLY_STOPPING_PATIENCE` : 15
 
 ## Donnees
 
-- Entree radio : `../New/DatasetRadioCom/*.ogg`
+- Entree radio : `Dataset Radio (2)/*.flac` et `../New/DatasetRadioCom/*.ogg`
 - Dataset synthetique : `dataset/{train,val}/{clean,raw}/` (44.1 kHz)
 - Checkpoints : `checkpoints/best_model.pt`
 - Modeles pre-entraines SpeechBrain : `pretrained_models/` (telecharges auto)
 - Resultats : `output/` (WAV + spectrogrammes + CSV KPIs)
+- Rapports : `rapport hebdo/` (fichiers .docx hebdomadaires)
 
 ## Dependances
 
-- `torch` / `torchaudio` - Deep learning
+- `torch` / `torchaudio` - Deep learning (ROCm pour GPU AMD)
 - `demucs` - Debruitage waveform (Facebook)
-- `voicefixer` - Super-resolution pre-entrainee
 - `datasets` - HuggingFace (LibriSpeech)
 - `soundfile` - I/O audio
 - `numpy`, `scipy` - Traitement signal
 - `matplotlib` - Graphiques
 - `librosa`, `tqdm` - Utilitaires
-- `speechbrain` - SepFormer (debruitage) + MetricGAN+ (polissage PESQ)
+- `speechbrain` - MetricGAN+ (polissage PESQ)
+- `pesq`, `pystoi`, `mir_eval` - Metriques audio
 
 ## Conventions de code
 
