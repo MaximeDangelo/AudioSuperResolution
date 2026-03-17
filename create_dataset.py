@@ -56,8 +56,12 @@ ATC_PAIRS = [
     ("07-wahmah_heathrow-air-traffic-control.flac", "07-wahmah_heathrow-air-traffic-control-Clean.wav"),
 ]
 
-# Sample rate cible (44.1kHz = sortie VoiceFixer)
+# Sample rate cible
 TARGET_SR = 44100
+
+# Passer les fichiers degrades dans Demucs avant sauvegarde
+# Le SpectralResUNet apprend ainsi a ameliorer la sortie de Demucs (pas le signal brut)
+APPLY_DEMUCS_TO_RAW = True
 
 # Nombre d'echantillons synthetiques (LibriSpeech)
 # Pour test rapide : 500/50. Pour dataset complet : 3000/300
@@ -517,6 +521,96 @@ def apply_radio_degradation(data, sr, rng, params=None):
     return result.astype(np.float32)
 
 
+# === Demucs pre-processing ===
+
+def apply_demucs_batch(raw_files, sr):
+    """Passe un batch de fichiers WAV dans Demucs pour debruitage.
+
+    Utilise Demucs en mode batch : ecrit tous les fichiers dans un dossier temp,
+    lance Demucs une seule fois, puis recupere les sorties.
+    Retourne un dict {filepath: demucs_output_array}.
+    """
+    if not APPLY_DEMUCS_TO_RAW:
+        return {}
+
+    import shutil
+    tmp_dir = os.path.join(tempfile.gettempdir(), "demucs_batch_in")
+    out_dir = os.path.join(tempfile.gettempdir(), "demucs_batch_out")
+    os.makedirs(tmp_dir, exist_ok=True)
+
+    # Ecrire tous les fichiers dans le dossier temp
+    for fpath in raw_files:
+        shutil.copy2(fpath, tmp_dir)
+
+    # Lancer Demucs sur tout le dossier
+    cmd = [
+        sys.executable, "-m", "demucs",
+        "--two-stems", "vocals",
+        "-n", "htdemucs",
+        "-o", out_dir,
+    ] + [os.path.join(tmp_dir, os.path.basename(f)) for f in raw_files]
+
+    subprocess.run(cmd, capture_output=True)
+
+    # Recuperer les sorties
+    results = {}
+    for fpath in raw_files:
+        base = os.path.splitext(os.path.basename(fpath))[0]
+        vocals_path = os.path.join(out_dir, "htdemucs", base, "vocals.wav")
+        if os.path.exists(vocals_path):
+            data, _ = sf.read(vocals_path, dtype="float32")
+            if data.ndim > 1:
+                data = data.mean(axis=1)
+            results[fpath] = data
+        else:
+            # Fallback : garder l'original
+            data, _ = sf.read(fpath, dtype="float32")
+            results[fpath] = data
+
+    # Nettoyage
+    shutil.rmtree(tmp_dir, ignore_errors=True)
+    shutil.rmtree(out_dir, ignore_errors=True)
+
+    return results
+
+
+def apply_demucs_single(data, sr):
+    """Passe un signal audio dans Demucs et retourne le resultat."""
+    tmp_in = os.path.join(tempfile.gettempdir(), "demucs_single_in.wav")
+    tmp_out_dir = os.path.join(tempfile.gettempdir(), "demucs_single_out")
+    sf.write(tmp_in, data, sr)
+
+    cmd = [
+        sys.executable, "-m", "demucs",
+        "--two-stems", "vocals",
+        "-n", "htdemucs",
+        "-o", tmp_out_dir,
+        tmp_in,
+    ]
+    result = subprocess.run(cmd, capture_output=True)
+
+    vocals_path = os.path.join(tmp_out_dir, "htdemucs", "demucs_single_in", "vocals.wav")
+    if os.path.exists(vocals_path):
+        out_data, _ = sf.read(vocals_path, dtype="float32")
+        if out_data.ndim > 1:
+            out_data = out_data.mean(axis=1)
+        # Aligner la longueur
+        if len(out_data) > len(data):
+            out_data = out_data[:len(data)]
+        elif len(out_data) < len(data):
+            out_data = np.pad(out_data, (0, len(data) - len(out_data)))
+    else:
+        out_data = data  # Fallback
+
+    # Nettoyage
+    import shutil
+    if os.path.exists(tmp_in):
+        os.remove(tmp_in)
+    shutil.rmtree(tmp_out_dir, ignore_errors=True)
+
+    return out_data.astype(np.float32)
+
+
 # === Chargement audio ===
 
 def load_audio_file(filepath, target_sr=TARGET_SR):
@@ -753,6 +847,19 @@ def main():
                 "sr": TARGET_SR,
             })
             synth_counts[split] += 1
+
+    # === Etape optionnelle : passer les raw dans Demucs ===
+    if APPLY_DEMUCS_TO_RAW:
+        print("\n--- Post-traitement : Demucs sur les fichiers raw ---")
+        import glob as g
+        for split in ["train", "val"]:
+            raw_dir = os.path.join(DATASET_DIR, split, "raw")
+            raw_files = sorted(g.glob(os.path.join(raw_dir, "*.wav")))
+            print(f"  {split}: {len(raw_files)} fichiers a traiter avec Demucs...")
+            for i, fpath in enumerate(tqdm(raw_files, desc=f"  Demucs {split}")):
+                data, file_sr = sf.read(fpath, dtype="float32")
+                demucs_data = apply_demucs_single(data, file_sr)
+                sf.write(fpath, demucs_data, file_sr)  # Ecrase le raw avec la version Demucs
 
     # Sauvegarder metadata
     csv_path = os.path.join(DATASET_DIR, "metadata.csv")
