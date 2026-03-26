@@ -7,6 +7,7 @@ __pycache__/
 # Dataset (trop volumineux)
 dataset/
 Dataset Radio (2)/
+librispeech_data/
 
 # Modeles et checkpoints
 checkpoints/

@@ -54,10 +54,17 @@ WIN_LENGTH = 2048
 # Loss weights
 L1_WEIGHT = 1.0
 STFT_WEIGHT = 1.0
+IDENTITY_WEIGHT = 0.3  # Penalise la sur-transformation du signal (evite la degradation)
+
+# Paires (clean, clean) dans le dataset : apprend au modele a ne rien faire sur signal propre
+CLEAN_PAIR_RATIO = 0.15  # 15% des exemples sont des paires identiques (clean, clean)
 
 # Early stopping
 PATIENCE = 15  # Nombre d'epochs sans amelioration avant arret
 MIN_DELTA = 1e-4  # Amelioration minimale pour compter comme progres
+
+# Reprise depuis un checkpoint (None = entrainement depuis zero)
+RESUME_FROM = None
 
 # Sample rate du dataset
 SR = 44100
@@ -138,6 +145,10 @@ class AudioPairDataset(Dataset):
 
         if self.augment:
             raw, clean = self._augment(raw, clean)
+
+        # Paires (clean, clean) : apprend au modele l'identite sur signal propre
+        if self.augment and np.random.random() < CLEAN_PAIR_RATIO:
+            raw = clean.copy()
 
         return (
             torch.from_numpy(raw).float().unsqueeze(0),
@@ -291,8 +302,13 @@ class SpectralResUNet(nn.Module):
         # Estimation HF additive
         hf = self.hf_estimator(d1)  # [B, 1, F, T']
 
+        # Gate HF par l'energie locale du signal : evite l'hallucination sur silence
+        # Si le signal est silencieux, energy_gate -> 0, donc aucune HF ajoutee
+        input_energy = mag_gpu.mean(dim=[2, 3], keepdim=True).clamp(min=1e-8)
+        energy_gate = torch.sigmoid(torch.log(input_energy) + 4)  # ~0 si silence, ~1 si signal
+
         # Appliquer masque sur GPU puis transferer pour iSTFT
-        enhanced_mag = mask * mag_gpu + F.relu(hf)
+        enhanced_mag = mask * mag_gpu + F.relu(hf) * energy_gate
         enhanced_mag_cpu = enhanced_mag.squeeze(1).to(STFT_DEVICE)
         phase_cpu = phase.squeeze(1)  # deja sur CPU
 
@@ -354,6 +370,7 @@ def train_one_epoch(model, dataloader, optimizer, l1_loss_fn, stft_loss_fn, devi
     total_loss = 0
     total_l1 = 0
     total_stft = 0
+    total_identity = 0
 
     for raw, clean in dataloader:
         raw = raw.to(device)
@@ -365,7 +382,11 @@ def train_one_epoch(model, dataloader, optimizer, l1_loss_fn, stft_loss_fn, devi
         loss_l1 = l1_loss_fn(output, clean)
         loss_stft = stft_loss_fn(output.squeeze(1), clean.squeeze(1))
 
-        loss = L1_WEIGHT * loss_l1 + STFT_WEIGHT * loss_stft
+        # Identity loss : penalise la sur-transformation du signal d'entree
+        # Apprend au modele a ne pas modifier ce qui n'a pas besoin de l'etre
+        loss_identity = l1_loss_fn(output, raw)
+
+        loss = L1_WEIGHT * loss_l1 + STFT_WEIGHT * loss_stft + IDENTITY_WEIGHT * loss_identity
         loss.backward()
 
         # Gradient clipping pour stabilite
@@ -376,9 +397,10 @@ def train_one_epoch(model, dataloader, optimizer, l1_loss_fn, stft_loss_fn, devi
         total_loss += loss.item()
         total_l1 += loss_l1.item()
         total_stft += loss_stft.item()
+        total_identity += loss_identity.item()
 
     n = len(dataloader)
-    return total_loss / n, total_l1 / n, total_stft / n
+    return total_loss / n, total_l1 / n, total_stft / n, total_identity / n
 
 
 def compute_perceptual_metrics(output, clean, sr=SR, max_samples=8):
@@ -555,9 +577,31 @@ def main():
     val_stoi_hist = []
     best_val_loss = float("inf")
     patience_counter = 0
+    start_epoch = 1
 
-    for epoch in range(1, EPOCHS + 1):
-        train_loss, train_l1, train_stft = train_one_epoch(
+    # Reprise depuis un checkpoint
+    if RESUME_FROM and os.path.exists(RESUME_FROM):
+        print(f"Reprise depuis : {RESUME_FROM}")
+        ckpt = torch.load(RESUME_FROM, map_location=DEVICE)
+        model.load_state_dict(ckpt["model_state_dict"])
+        optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        start_epoch = ckpt["epoch"] + 1
+        # Restaurer le meilleur val_loss connu (depuis best_model.pt)
+        best_ckpt_path = os.path.join(OUTPUT_DIR, "best_model.pt")
+        if os.path.exists(best_ckpt_path):
+            best_ckpt = torch.load(best_ckpt_path, map_location=DEVICE)
+            best_val_loss = best_ckpt["val_loss"]
+            best_epoch = best_ckpt.get("epoch", start_epoch - 1)
+            patience_counter = (start_epoch - 1) - best_epoch
+            print(f"  Meilleur val_loss connu : {best_val_loss:.4f} (epoch {best_epoch})")
+            print(f"  Patience actuelle : {patience_counter}/{PATIENCE}")
+        # Avancer le scheduler jusqu'a l'epoch de reprise
+        for _ in range(start_epoch - 1):
+            scheduler.step()
+        print(f"  Reprise a l'epoch {start_epoch} | LR : {optimizer.param_groups[0]['lr']:.2e}\n")
+
+    for epoch in range(start_epoch, EPOCHS + 1):
+        train_loss, train_l1, train_stft, train_identity = train_one_epoch(
             model, train_loader, optimizer, l1_loss_fn, stft_loss_fn, DEVICE,
         )
 
@@ -580,7 +624,7 @@ def main():
             metrics_str = f" | PESQ: {val_pesq:.2f} | STOI: {val_stoi:.3f}"
         print(
             f"  Epoch {epoch:3d}/{EPOCHS} | "
-            f"Train: {train_loss:.4f} (L1={train_l1:.4f}, STFT={train_stft:.4f}) | "
+            f"Train: {train_loss:.4f} (L1={train_l1:.4f}, STFT={train_stft:.4f}, ID={train_identity:.4f}) | "
             f"Val: {val_loss:.4f}{metrics_str} | LR: {lr:.2e}"
         )
 
