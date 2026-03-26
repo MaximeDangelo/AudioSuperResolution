@@ -703,28 +703,14 @@ def generate_atc_pairs(rng):
 # === Partie 2 : Paires synthetiques LibriSpeech ===
 
 def generate_synthetic_pairs(rng, n_train, n_val):
-    """Genere des paires synthetiques depuis LibriSpeech (fichiers Parquet locaux)."""
-    import pyarrow.parquet as pq
-    import io
-    import glob as g
+    """Genere des paires synthetiques depuis LibriSpeech (via torchaudio)."""
+    import torchaudio
 
-    # Charger depuis le cache HuggingFace (fichiers Parquet deja telecharges)
-    cache_pattern = os.path.join(
-        os.path.expanduser("~"), ".cache", "huggingface", "hub",
-        "datasets--librispeech_asr", "snapshots", "*", "clean", "train.100", "*.parquet"
-    )
-    parquet_files = sorted(g.glob(cache_pattern))
-    if not parquet_files:
-        raise RuntimeError(
-            "Pas de fichiers LibriSpeech en cache. "
-            "Lancez d'abord: python -c \"from datasets import load_dataset; "
-            "load_dataset('librispeech_asr', 'clean', split='train.100')\""
-        )
-    import pyarrow as pa
-    print(f"  Chargement de LibriSpeech depuis {len(parquet_files)} fichiers Parquet locaux...")
-    tables = [pq.read_table(f) for f in parquet_files]
-    table = pa.concat_tables(tables)
-    n_samples = len(table)
+    # Telecharge uniquement train-clean-100 (~6 Go) dans ./librispeech_data/
+    ls_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "librispeech_data")
+    print(f"  Chargement de LibriSpeech train-clean-100 (torchaudio)...")
+    dataset = torchaudio.datasets.LIBRISPEECH(root=ls_dir, url="train-clean-100", download=True)
+    n_samples = len(dataset)
     print(f"  {n_samples} samples disponibles\n")
 
     indices = list(range(n_samples))
@@ -744,11 +730,8 @@ def generate_synthetic_pairs(rng, n_train, n_val):
             if counts[current_split] >= targets[current_split]:
                 break
 
-        row = table.slice(idx, 1).to_pydict()
-        audio_bytes = row["audio"][0]["bytes"]
-
-        # Decoder l'audio FLAC depuis les bytes
-        data, sr = sf.read(io.BytesIO(audio_bytes), dtype="float32")
+        waveform, sr, _, _, _, _ = dataset[idx]
+        data = waveform.squeeze(0).numpy()
         if data.ndim > 1:
             data = np.mean(data, axis=1)
 
