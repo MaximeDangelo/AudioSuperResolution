@@ -33,3 +33,23 @@ Thumbs.db
 # Misc
 *.ogg
 *.wav
+
+# Fichiers temporaires Office
+docs/.~lock.*.docx#
+rapport\ hebdo/.~lock.*.docx#
+*.~lock.*#
+
+# Gros fichiers modèles (trop lourds pour git)
+checkpoints/sgmse/
+checkpoints/whisper_atco2/
+pretrained_models/
+pretrained_metricgan/
+dataset/
+data/military_whisper/audio/
+*.pt
+*.ckpt
+
+# Runs et résultats
+runs/
+results/
+output/

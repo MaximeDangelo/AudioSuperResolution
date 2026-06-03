@@ -28,7 +28,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 # Forcer CPU pour eviter les GPU hangs ROCm lors de chargements multiples
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-from train import SpectralResUNet, SR
+from train import SpectralResUNet, WaveformResUNet, SR, MODEL_TYPE
 
 SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
 CKPT_DIR     = os.path.join(SCRIPT_DIR, "checkpoints")
@@ -40,16 +40,21 @@ DEMUCS_MODEL = "htdemucs"
 SILENCE_RMS_THRESHOLD = 0.005
 SILENCE_FRAME_S = 0.1  # Taille des trames pour detection silence (100ms)
 
-CHECKPOINTS = [
-    ("00_unet_pas_entraine",   None),
-    ("01_epoch010",            os.path.join(CKPT_DIR, "checkpoint_epoch010.pt")),
-    ("02_epoch020",            os.path.join(CKPT_DIR, "checkpoint_epoch020.pt")),
-    ("03_epoch030",            os.path.join(CKPT_DIR, "checkpoint_epoch030.pt")),
-    ("04_epoch040",            os.path.join(CKPT_DIR, "checkpoint_epoch040.pt")),
-    ("05_epoch050",            os.path.join(CKPT_DIR, "checkpoint_epoch050.pt")),
-    ("06_epoch060",            os.path.join(CKPT_DIR, "checkpoint_epoch060.pt")),
-    ("07_best_model",          os.path.join(CKPT_DIR, "best_model.pt")),
-]
+# Detecter les checkpoints disponibles pour le modele actuel
+def detect_checkpoints():
+    ckpts = [("00_unet_pas_entraine", None)]
+    # Lister les checkpoints existants et compatibles
+    for f in sorted(os.listdir(CKPT_DIR)):
+        if f.startswith("checkpoint_epoch") and f.endswith(".pt"):
+            epoch_str = f.replace("checkpoint_epoch", "").replace(".pt", "")
+            path = os.path.join(CKPT_DIR, f)
+            # Verifier la taille pour filtrer les anciens modeles
+            # (spectral ~46M, temporal ~37M)
+            ckpts.append((f"epoch{epoch_str}", path))
+    ckpts.append(("best_model", os.path.join(CKPT_DIR, "best_model.pt")))
+    return ckpts
+
+CHECKPOINTS = detect_checkpoints()
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -137,10 +142,17 @@ def apply_silence_gate(data, model_fn, sr=SR):
     return out
 
 def run_unet(data, ckpt_path=None):
-    model = SpectralResUNet().to(torch.device("cpu"))
+    if MODEL_TYPE == "temporal":
+        model = WaveformResUNet().to(torch.device("cpu"))
+    else:
+        model = SpectralResUNet().to(torch.device("cpu"))
     if ckpt_path and os.path.exists(ckpt_path):
         ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
-        model.load_state_dict(ckpt["model_state_dict"])
+        try:
+            model.load_state_dict(ckpt["model_state_dict"])
+        except RuntimeError:
+            print(f"    SKIP {ckpt_path} (incompatible avec modele {MODEL_TYPE})")
+            return data
     model.eval()
 
     def model_fn(chunk):
@@ -208,7 +220,10 @@ for label, ckpt_path in CHECKPOINTS:
 
     status = "poids aleatoires" if ckpt_path is None else os.path.basename(ckpt_path)
     print(f"  {label} ({status})...")
-    out = run_unet(demucs_out, ckpt_path)
+    # Modele temporel : entraine sur raw directement (pas sur sortie Demucs)
+    # Modele spectral : entraine sur sortie Demucs
+    unet_input = raw if MODEL_TYPE == "temporal" else demucs_out
+    out = run_unet(unet_input, ckpt_path)
     # Aligner exactement sur la longueur du segment
     out = out[:n_samples]
     if len(out) < n_samples:

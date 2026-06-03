@@ -35,6 +35,9 @@ except ImportError:
 
 # === Configuration ===
 
+# Type de modele : "spectral" (ResUNet STFT) ou "temporal" (ResUNet waveform)
+MODEL_TYPE = "temporal"
+
 DATASET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dataset")
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoints")
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
@@ -64,7 +67,7 @@ PATIENCE = 15  # Nombre d'epochs sans amelioration avant arret
 MIN_DELTA = 1e-4  # Amelioration minimale pour compter comme progres
 
 # Reprise depuis un checkpoint (None = entrainement depuis zero)
-RESUME_FROM = None
+RESUME_FROM = os.path.join(OUTPUT_DIR, "checkpoint_epoch060.pt")
 
 # Sample rate du dataset
 SR = 44100
@@ -328,6 +331,132 @@ class SpectralResUNet(nn.Module):
         return output.unsqueeze(1).to(model_device)  # [B, 1, T] retour sur GPU
 
 
+# === ResUNet Temporel (Waveform) ===
+
+class ResBlock1D(nn.Module):
+    """Bloc residuel 1D pour waveform."""
+
+    def __init__(self, channels, kernel_size=7):
+        super().__init__()
+        padding = kernel_size // 2
+        self.conv1 = nn.Conv1d(channels, channels, kernel_size, padding=padding)
+        self.bn1 = nn.BatchNorm1d(channels)
+        self.conv2 = nn.Conv1d(channels, channels, kernel_size, padding=padding)
+        self.bn2 = nn.BatchNorm1d(channels)
+        self.act = nn.LeakyReLU(0.2)
+
+    def forward(self, x):
+        residual = x
+        out = self.act(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        return self.act(out + residual)
+
+
+class EncoderBlock1D(nn.Module):
+    """Encoder 1D : Conv1D stride 4 + ResBlock."""
+
+    def __init__(self, in_ch, out_ch, stride=4):
+        super().__init__()
+        self.conv = nn.Conv1d(in_ch, out_ch, kernel_size=stride * 2, stride=stride, padding=stride // 2)
+        self.bn = nn.BatchNorm1d(out_ch)
+        self.act = nn.LeakyReLU(0.2)
+        self.res = ResBlock1D(out_ch)
+
+    def forward(self, x):
+        x = self.act(self.bn(self.conv(x)))
+        x = self.res(x)
+        return x
+
+
+class DecoderBlock1D(nn.Module):
+    """Decoder 1D : ConvTranspose1D stride 4 + ResBlock + skip connection."""
+
+    def __init__(self, in_ch, out_ch, stride=4):
+        super().__init__()
+        self.deconv = nn.ConvTranspose1d(in_ch, out_ch, kernel_size=stride * 2, stride=stride, padding=stride // 2)
+        self.bn = nn.BatchNorm1d(out_ch)
+        self.act = nn.LeakyReLU(0.2)
+        # Apres concat avec skip : out_ch * 2 -> out_ch
+        self.conv1x1 = nn.Conv1d(out_ch * 2, out_ch, 1)
+        self.res = ResBlock1D(out_ch)
+
+    def forward(self, x, skip):
+        x = self.act(self.bn(self.deconv(x)))
+        # Ajuster taille si necessaire
+        if x.shape[2] != skip.shape[2]:
+            x = F.interpolate(x, size=skip.shape[2], mode="linear", align_corners=False)
+        x = torch.cat([x, skip], dim=1)
+        x = self.conv1x1(x)
+        x = self.res(x)
+        return x
+
+
+class WaveformResUNet(nn.Module):
+    """ResUNet operant directement sur la forme d'onde (domaine temporel).
+
+    Entree : signal audio [B, 1, T]
+    -> Encoder Conv1D (stride 4) : 1 -> 32 -> 64 -> 128 -> 256
+    -> Bottleneck
+    -> Decoder ConvTranspose1D + skip connections
+    -> Sortie residuelle : input + correction [B, 1, T]
+
+    Avantage vs SpectralResUNet : preserve la phase naturellement,
+    pas d'artefacts STFT/iSTFT.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+        # Encoder (1 -> 32 -> 64 -> 128 -> 256)
+        self.enc1 = EncoderBlock1D(1, 32, stride=4)
+        self.enc2 = EncoderBlock1D(32, 64, stride=4)
+        self.enc3 = EncoderBlock1D(64, 128, stride=4)
+        self.enc4 = EncoderBlock1D(128, 256, stride=4)
+
+        # Bottleneck
+        self.bottleneck = ResBlock1D(256)
+
+        # Decoder (256 -> 128 -> 64 -> 32 -> 16)
+        self.dec4 = DecoderBlock1D(256, 128, stride=4)
+        self.dec3 = DecoderBlock1D(128, 64, stride=4)
+        self.dec2 = DecoderBlock1D(64, 32, stride=4)
+        self.dec1 = DecoderBlock1D(32, 16, stride=4)
+
+        # Projection de l'entree pour le skip de dec1
+        self.input_proj = nn.Conv1d(1, 16, 1)
+
+        # Sortie : correction residuelle
+        self.final = nn.Conv1d(16, 1, 1)
+
+    def forward(self, x):
+        # x: [B, 1, T]
+        T = x.shape[2]
+        inp = x
+
+        # Encoder
+        e1 = self.enc1(x)       # [B, 32, T/4]
+        e2 = self.enc2(e1)      # [B, 64, T/16]
+        e3 = self.enc3(e2)      # [B, 128, T/64]
+        e4 = self.enc4(e3)      # [B, 256, T/256]
+
+        # Bottleneck
+        b = self.bottleneck(e4)
+
+        # Decoder avec skip connections
+        d4 = self.dec4(b, e3)
+        d3 = self.dec3(d4, e2)
+        d2 = self.dec2(d3, e1)
+        d1 = self.dec1(d2, self.input_proj(inp))
+
+        # Sortie residuelle : signal original + correction apprise
+        correction = self.final(d1)
+        if correction.shape[2] != T:
+            correction = F.interpolate(correction, size=T, mode="linear", align_corners=False)
+
+        output = inp + correction
+        return output
+
+
 # === Loss functions ===
 
 class MultiResolutionSTFTLoss(nn.Module):
@@ -538,11 +667,15 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
 
-    print("=== Entrainement SpectralResUNet - Super-Resolution Audio ===")
+    model_name = "WaveformResUNet" if MODEL_TYPE == "temporal" else "SpectralResUNet"
+    print(f"=== Entrainement {model_name} - Super-Resolution Audio ===")
     print(f"Device: {DEVICE}")
+    print(f"Model type: {MODEL_TYPE}")
     print(f"Batch size: {BATCH_SIZE} | LR: {LEARNING_RATE} | Epochs: {EPOCHS}")
     print(f"Segment: {SEGMENT_LENGTH / SR:.1f}s ({SEGMENT_LENGTH} samples @ {SR}Hz)")
-    print(f"STFT: n_fft={N_FFT}, hop={HOP_LENGTH}\n")
+    if MODEL_TYPE == "spectral":
+        print(f"STFT: n_fft={N_FFT}, hop={HOP_LENGTH}")
+    print()
 
     # Dataset
     print("Chargement du dataset...")
@@ -560,9 +693,12 @@ def main():
     )
 
     # Modele
-    model = SpectralResUNet().to(DEVICE)
+    if MODEL_TYPE == "temporal":
+        model = WaveformResUNet().to(DEVICE)
+    else:
+        model = SpectralResUNet().to(DEVICE)
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    print(f"Modele: SpectralResUNet ({n_params:,} parametres)\n")
+    print(f"Modele: {model_name} ({n_params:,} parametres)\n")
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=EPOCHS, eta_min=1e-6)
@@ -646,7 +782,6 @@ def main():
                 },
             }, ckpt_path)
             print(f"  -> Meilleur modele sauvegarde ({ckpt_path})")
-        else:
             patience_counter += 1
             if patience_counter >= PATIENCE:
                 print(f"\n  Early stopping a l'epoch {epoch} (pas d'amelioration depuis {PATIENCE} epochs)")

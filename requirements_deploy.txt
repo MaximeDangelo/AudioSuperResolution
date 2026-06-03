@@ -1,0 +1,13 @@
+# Dependances minimales pour le pipeline de debruitage + transcription
+# Installation : pip install -r requirements_deploy.txt
+#
+# GPU NVIDIA : pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+# GPU AMD    : pip install torch torchaudio --index-url https://download.pytorch.org/whl/rocm6.2
+# CPU seul   : pip install torch torchaudio
+
+openai-whisper>=20250625
+noisereduce>=3.0.0
+soundfile>=0.12.0
+numpy>=1.23.0
+scipy>=1.10.0
+# torch et torchaudio : voir commentaire GPU ci-dessus

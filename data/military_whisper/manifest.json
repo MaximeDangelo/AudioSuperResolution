@@ -1,0 +1,1634 @@
+[
+  {
+    "audio": "audio/0000_radio.wav",
+    "text": "Turn on IFF mode 4 and respond immediately",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0001_radio.wav",
+    "text": "IFF positive",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0002_radio.wav",
+    "text": "IFF negative",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0003.wav",
+    "text": "No IFF response",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0004_radio.wav",
+    "text": "Weapons free",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0005.wav",
+    "text": "Weapons tight",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0006_radio.wav",
+    "text": "permission to engage",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0007.wav",
+    "text": "Target moving east at 400 knots, last seen at coordinate Foxtrot 12",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0008_radio.wav",
+    "text": "Target neutralized",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0009.wav",
+    "text": "Proceed to next assigned target",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0010.wav",
+    "text": "Form up line abreast, 1 NM lateral spacing",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0011.wav",
+    "text": "Altitude hold 15,000 feet, ±100 feet",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0012_radio.wav",
+    "text": "Missile approach inbound, bearing 180 degrees, deploy defensive flares",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0013.wav",
+    "text": "New hostile track at 030 degrees, closing speed 500 knots",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0014_radio.wav",
+    "text": "Radar warning receiver detects hostile radar lock",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0015.wav",
+    "text": "Switch radar to high PRF air-to-air search mode",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0016.wav",
+    "text": "Activate targeting pod and slew to grid coordinate Foxtrot 12",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0017_radio.wav",
+    "text": "Activate chaff dispenser, prepare for missile evasion",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0018_radio.wav",
+    "text": "Wingman 2, activate targeting pod and acquire hostile at 12 o’clock, range 8 miles",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0019_radio.wav",
+    "text": "Broadcast IRST data to package over Link 16",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0020_radio.wav",
+    "text": "Transmit on guard frequency 121.5 MHz when egressing",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0021.wav",
+    "text": "Rendezvous at bullseye 15 NM west at 1020 Zulu",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0022_radio.wav",
+    "text": "Flight lead, you are strike flight; wingmen on CAP coverage",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0023.wav",
+    "text": "Attack commence time at 1030 Zulu, hold formation until then",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0024.wav",
+    "text": "Wingman maintain 1 NM lateral separation and ±200 feet altitude",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0025.wav",
+    "text": "Weapons Hold",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0026_radio.wav",
+    "text": "Eagle 1, select AIM-120, two missiles ready",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0027.wav",
+    "text": "Fire AIM-120 on assigned target, weapons tight",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0028_radio.wav",
+    "text": "Request weapons status, over",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0029_radio.wav",
+    "text": "Weapons free, engage hostile bandit bearing zero four five",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0030.wav",
+    "text": "Eagle 1, select two AIM-120 for launch, weapons free",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0031_radio.wav",
+    "text": "Selecting two AIM-120, weapons free, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0032.wav",
+    "text": "Launch AIM-120, target bearing 090, range 10 miles",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0033_radio.wav",
+    "text": "Launching AIM-120, target bearing 090, range 10 miles, Eagle 1",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0034_radio.wav",
+    "text": "Eagle 1, time on target 1530 Zulu, grid 43NK, confirm ready",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0035.wav",
+    "text": "Eagle 1, ready for TOT 1530",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0036.wav",
+    "text": "Hold weapons release until cleared",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0037.wav",
+    "text": "Eagle 1, weapons free, commence attack",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0038_radio.wav",
+    "text": "Roger, weapons free, rolling in now",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0039_radio.wav",
+    "text": "Copy, hammer 2-1, tally armor, engaging priority one",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0040_radio.wav",
+    "text": "Viper 3-2 copies, AAA first, then troops. Inbound from the west",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0041_radio.wav",
+    "text": "Falcon 1-1, roger, switching to new priority, tally technicals",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0042_radio.wav",
+    "text": "priority one",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0043_radio.wav",
+    "text": "Cleared hot",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0044.wav",
+    "text": "Egress planned via route Charlie, maintain low altitude",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0045.wav",
+    "text": "Eagle 1, weapons release, egress left heading 270, climb to 5,000 feet",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0046_radio.wav",
+    "text": "Weapons released, egress left 270 climbing to 5,000, Eagle 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0047_radio.wav",
+    "text": "SAM launch detected, maneuver hard right and descend low",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0048.wav",
+    "text": "Maneuvering right, descending low, Eagle 1",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0049.wav",
+    "text": "Request immediate reattack clearance, BDA indicates target intact",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0050.wav",
+    "text": "Eagle 2, request BDA on target grid 43NK, over",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0051_radio.wav",
+    "text": "Copy, good effect, hold for further instructions",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0052.wav",
+    "text": "Eagle 1, roger, weapons tight, standby for final clearance",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0053.wav",
+    "text": "Eagle 2, target laser marked, you are cleared to engage",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0054.wav",
+    "text": "Roger, Eagle 2 acquired laser, engaging target",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0055.wav",
+    "text": "Copy abort attack, holding weapons release, egressing target area",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0056.wav",
+    "text": "Eagle 1, LITENING pod activated, scanning target grid",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0057_radio.wav",
+    "text": "Copy, report visual on enemy armor",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0058.wav",
+    "text": "Eagle 2 laser armed, ready to designate",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0059_radio.wav",
+    "text": "Roger, confirm target is designated, clearance to release on laser",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0060.wav",
+    "text": "Laser on target, releasing laser-guided munition",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0061_radio.wav",
+    "text": "Splash, good effect on laser-designated target",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0062_radio.wav",
+    "text": "Roger, standby for attack clearance",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0063.wav",
+    "text": "Eagle 1, switch sensor to FLIR mode to help spot friendlies near targets",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0064.wav",
+    "text": "Switching to FLIR sensor mode, scanning for friendlies",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0065_radio.wav",
+    "text": "Good, advise if friendlies in close proximity",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0066_radio.wav",
+    "text": "Eagle 1, radio check, over",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0067.wav",
+    "text": "Eagle 1, radio check loud and clear",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0068_radio.wav",
+    "text": "Copy, maintain radio silence except for essential transmissions",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0069_radio.wav",
+    "text": "Roger, will keep comms to minimum, Eagle 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0070.wav",
+    "text": "Eagle 2, radio check, you read me?",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0071.wav",
+    "text": "Eagle 2, reading weak, switch to alternate frequency 278.8, over",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0072.wav",
+    "text": "Switching to 278.8, Eagle 2",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0073_radio.wav",
+    "text": "Copy winds 270/15, 5 miles vis, scat clouds 2,000 feet, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0074.wav",
+    "text": "Roger, will shift to IR sensor mode for targeting",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0075.wav",
+    "text": "Eagle 2 requests weather update, over",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0076.wav",
+    "text": "Copy, will adjust inbound route accordingly",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0077_radio.wav",
+    "text": "Eagle 1 copies scramble, launching now",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0078.wav",
+    "text": "Viper 2 roger, scramble 30 seconds, heading 270, 15,000 feet",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0079.wav",
+    "text": "Copy priority scramble, Eagle flight wheels up in 55 seconds",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0080_radio.wav",
+    "text": "Viper 1 cleared for immediate takeoff, rolling runway 09",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0081.wav",
+    "text": "Eagle 1 roger, turning 045, climbing 20,000 feet, speed 350 knots",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0082_radio.wav",
+    "text": "Turning right heading 070, maintaining 20,000 feet, Eagle 1",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0083_radio.wav",
+    "text": "Climbing 25,000 feet, turning 110, will engage visual, Viper 2",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0084.wav",
+    "text": "Reducing speed to 300 knots, maintaining heading, Ghost 3",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0085_radio.wav",
+    "text": "Heading 090, 5 miles, bandit 3 o’clock, cleared to engage, Eagle flight",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0086_radio.wav",
+    "text": "Vector 180 for egress, descending to 10,000 feet, Eagle 1",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0087.wav",
+    "text": "Passing request to target to rock wings, out",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0088_radio.wav",
+    "text": "Target rocking wings, likely friendly, Eagle 3",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0089.wav",
+    "text": "Eagle 2, target confirmed enemy fighter, clearance to engage",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0090_radio.wav",
+    "text": "Cleared to engage, Eagle 2",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0091.wav",
+    "text": "Copy, breaking off intercept, returning to patrol, Viper 3",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0092.wav",
+    "text": "Copy range 10 miles, bandit level 15,000 feet, Eagle 1",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0093_radio.wav",
+    "text": "Target at 3 o’clock, 15 miles, bandit east, Viper 2",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0094_radio.wav",
+    "text": "Maintaining 5 miles astern, 12,000 feet and 320 knots, Ghost 3",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0095_radio.wav",
+    "text": "Range 3 miles, slowing to 280 knots, Eagle 1",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0096_radio.wav",
+    "text": "Copy bandit left turn 210, range 7 miles, altitude 14,000 feet, Viper 1",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0097.wav",
+    "text": "Switching to 243.0, monitoring guard, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0098.wav",
+    "text": "Viper 2, contact AWACS on 251.8 for tactical updates, out",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0099_radio.wav",
+    "text": "Contact AWACS 251.8, Viper 2",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0100.wav",
+    "text": "Copy radio silence, emergency only, Ghost 3",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0101_radio.wav",
+    "text": "Eagle flight, change call sign to Falcon flight, confirm",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0102.wav",
+    "text": "Falcon flight confirmed",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0103.wav",
+    "text": "Wilco, will report visual and heading at initial intercept, Viper 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0104_radio.wav",
+    "text": "Ghost 4, acknowledge this frequency and confirm ready to copy",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0105_radio.wav",
+    "text": "Ghost 4 acknowledges frequency, ready to copy",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0106.wav",
+    "text": "Eagle 2, terminate intercept, return to base frequency 130.5",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0107.wav",
+    "text": "Terminating intercept, returning to 130.5, Eagle 2",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0108.wav",
+    "text": "Copy hostile MiG-29, threat level high, Eagle 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0109_radio.wav",
+    "text": "Threat downgraded to low, maintaining visual, Ghost 3",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0110_radio.wav",
+    "text": "Copy, increasing spacing to 5 miles, Eagle 2",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0111_radio.wav",
+    "text": "Cleared to engage hostile threat, Viper 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0112_radio.wav",
+    "text": "Target neutralized, threat ended, Ghost 4",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0113.wav",
+    "text": "Terminate intercept, returning to base, descending to FL150, Eagle 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0114.wav",
+    "text": "Diverting to Florennes for recovery, Ghost 3",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0115_radio.wav",
+    "text": "Eagle 2, switch to approach frequency 118.5 for recovery, out",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0116_radio.wav",
+    "text": "Switching to 118.5 for approach, Eagle 2",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0117.wav",
+    "text": "Proceeding to emergency airfield Florennes, squawk 7700, Ghost 4",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0118.wav",
+    "text": "Copy active radar emissions, switching to passive sensors, Eagle 1",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0119_radio.wav",
+    "text": "Activating IRST, will acquire heat signature at 7 miles, Viper 2",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0120.wav",
+    "text": "Copy radar lock, initiating ECM jamming, maintaining 8 miles, Ghost 3",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0121_radio.wav",
+    "text": "Copy two bandits bearing 130, range 15 miles per AWACS, Viper 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0122.wav",
+    "text": "Performing radar sweep 090 to 120, commencing EA Alpha, Ghost 4",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0123_radio.wav",
+    "text": "Eagle 1, confirm ECM jamming effectiveness on bandit radar",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0124.wav",
+    "text": "ECM effective, bandit radar frequency shifting, Eagle 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0125.wav",
+    "text": "Copy increased SAM activity, maintaining 15,000 feet, Viper 1",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0126.wav",
+    "text": "Recon complete, exiting via route Alpha, returning to base, Ghost 4",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0127_radio.wav",
+    "text": "Copy route direct Alpha-5, maintaining FL200, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0128_radio.wav",
+    "text": "Diverting to Bravo-3, maintaining current altitude, Viper 2",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0129.wav",
+    "text": "Starting orbit pattern Grid 44MJ at 12,000 feet for 30 minutes, Ghost 3",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0130_radio.wav",
+    "text": "Eagle 2, traffic reported at your altitude, climb to flight level 220",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0131_radio.wav",
+    "text": "Climbing to FL220, Eagle 2",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0132.wav",
+    "text": "Descending to 10,000 feet for return transit, Viper 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0133.wav",
+    "text": "Avoiding below 8,000 feet, Ghost 4",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0134.wav",
+    "text": "Activating IRST, scanning sector 090 to 120, Eagle 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0135.wav",
+    "text": "Viper 2, confirm acquisition of target with targeting radar",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0136_radio.wav",
+    "text": "Copy, collecting SAR imagery of convoy at 52MK, Ghost 3",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0137.wav",
+    "text": "Eagle 2, IRST inoperative, switching to radar sweep",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0138.wav",
+    "text": "Copy IRST failure, revert to radar for sector sweep, Eagle 2",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0139_radio.wav",
+    "text": "Reducing radar emissions to low PRF, Viper 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0140_radio.wav",
+    "text": "Copy jamming on IRST, switching to radar tracking, Ghost 4",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0141.wav",
+    "text": "Copy visual and sensor confirmation, continue surveillance",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0142_radio.wav",
+    "text": "Switching to passive sensors, avoiding active radar emissions, Ghost 3",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0143_radio.wav",
+    "text": "EMCON lifted, resuming normal sensor and comms operations, Viper 1",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0144_radio.wav",
+    "text": "Copy SAM site 15 miles northeast, maintaining low altitude, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0145_radio.wav",
+    "text": "Copy radar lock warning, initiating evasive maneuvers, Ghost 3",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0146_radio.wav",
+    "text": "Copy jamming, switching to passive sensors, Eagle 2",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0147.wav",
+    "text": "Copy armored column moving east on Route Red, Viper 1",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0148.wav",
+    "text": "Missile launch confirmed, executing evasive maneuvers, Ghost 4",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0149_radio.wav",
+    "text": "Eagle 1, this is Recon Control, radio check, over",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0150.wav",
+    "text": "Recon Control, Eagle 1, reading you loud and clear, over",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0151.wav",
+    "text": "Eagle 2, report position and fuel status",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0152_radio.wav",
+    "text": "Eagle 2, position grid 45NK, altitude 15,000 feet, fuel at 65 percent",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0153.wav",
+    "text": "Ghost 3, proceed to grid 52MJ for SAR imagery collection",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0154_radio.wav",
+    "text": "Proceeding grid 52MJ for SAR imagery, Ghost 3",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0155_radio.wav",
+    "text": "Recon Control, Eagle 1, say again last transmission",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0156_radio.wav",
+    "text": "All units, pause transmission, hostile jamming detected",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0157.wav",
+    "text": "Viper 2, switch to encrypted channel Bravo, acknowledge",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0158_radio.wav",
+    "text": "Switching to encrypted channel Bravo, Viper 2",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0159_radio.wav",
+    "text": "Eagle 1, Recon Control out",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0160.wav",
+    "text": "Eagle 1, out",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0161_radio.wav",
+    "text": "Recovery cleared direct to base, approach pattern Bravo, Ghost 3",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0162_radio.wav",
+    "text": "Diverting to alternate at 56PN, monitoring fuel, Viper 1",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0163.wav",
+    "text": "Mission terminated, radio silence until approach, Ghost 4",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0164.wav",
+    "text": "Copy bandits 30 miles north, turning heading 340 for intercept, Eagle 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0165.wav",
+    "text": "Copy jamming support active, maintaining pace, Viper 2",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0166_radio.wav",
+    "text": "Cleared for recon on 52MJ, monitoring UAV feed, Ghost 3",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0167.wav",
+    "text": "Copy enemy AAA along Route Red, maintaining standoff, Eagle 2",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0168_radio.wav",
+    "text": "Eagle 1, confirm SA-10 site at 45NK status",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0169.wav",
+    "text": "SA-10 site at 45NK destroyed, no radar return, Eagle 1",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0170_radio.wav",
+    "text": "Copy destroyed, proceed to secondary targets",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0171.wav",
+    "text": "Ingress Route Red, 10,000 feet, EMCON Bravo, Eagle 2",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0172.wav",
+    "text": "Copy, maintaining 090, Ghost 2",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0173_radio.wav",
+    "text": "Eagle 1, roger, maintain egress route Bravo for safe exit",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0174_radio.wav",
+    "text": "Copy Viper 3, prioritize SA-15 emitter for suppression",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0175_radio.wav",
+    "text": "Copy effective jamming, proceeding with HARM launch, Viper",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0176_radio.wav",
+    "text": "Viper 1, roger target acquisition, continue engagement",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0177_radio.wav",
+    "text": "Copy, Viper 2 acquiring SA-10, HARM launch imminent",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0178.wav",
+    "text": "Viper 3 standing by for missiles release",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0179.wav",
+    "text": "Weapons free received, locking target now",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0180_radio.wav",
+    "text": "HARM locked on target, missile away",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0181_radio.wav",
+    "text": "Copy HARM launch, Viper 1. Confirm target impact",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0182_radio.wav",
+    "text": "HARM impacting target, radar return lost, suspect kill",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0183.wav",
+    "text": "Viper 2 locked targeting SA-15 radar, missile away",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0184.wav",
+    "text": "Viper 3 locking, ARM away",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0185.wav",
+    "text": "Viper 1 to AWACS, HARM status?",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0186.wav",
+    "text": "Copy Eagle 1, maintain break left, clear to chaff and flare",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0187_radio.wav",
+    "text": "Chaff and flare deployed, Eagle 1",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0188.wav",
+    "text": "Ghost 2, roger, divert 20 degrees south, maintain SA threat scan",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0189_radio.wav",
+    "text": "Copy Viper 1, maintain radio silence except for emergencies",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0190.wav",
+    "text": "Viper 2, hit by AAA, fuel critical. Request tanker vectors and cover",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0191.wav",
+    "text": "Copy, Lead. Switching to low power comms",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0192_radio.wav",
+    "text": "Copy. Engaging target with HARM missiles",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0193_radio.wav",
+    "text": "Copy Lead, radar off, monitoring passive sensors",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0194.wav",
+    "text": "SAM site destroyed, ceasing emissions, returning to EMCON Alpha",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0195.wav",
+    "text": "Recovery, Lead copies. Squawking standby, setting code 4321",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0196_radio.wav",
+    "text": "Copy Lead, RTB Whiskey Five. Confirm emergency fuel state",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0197_radio.wav",
+    "text": "Priority one: Protect the strike aircraft at all costs",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0198.wav",
+    "text": "Egress route is via waypoint Charlie 9, altitude 20,000 feet",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0199.wav",
+    "text": "No engagement over restricted zones unless fired upon first",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0200.wav",
+    "text": "Report all hostile contacts immediately with bearing, range, and altitude",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0201.wav",
+    "text": "Maintain minimum separation from strike package of 3 nautical miles",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0202_radio.wav",
+    "text": "Weapons free upon hostile action. Hold fire unless engaged",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0203.wav",
+    "text": "Roger. Continuing to monitor. Strike package steady",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0204_radio.wav",
+    "text": "Wingman, check in. Report your position",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0205.wav",
+    "text": "Lead, this is Wingman. Visual right at 500 feet, 2 ship’s length",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0206_radio.wav",
+    "text": "Copy Wingman. Maintain station",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0207.wav",
+    "text": "Roger, closing in to 300 feet",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0208.wav",
+    "text": "Copy Lead. Holding position on right. Ready to engage",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0209_radio.wav",
+    "text": "Lead, bogey at two o'clock, range 15 miles, altitude 18,000 feet",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0210.wav",
+    "text": "Copy bogey, scanning",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0211_radio.wav",
+    "text": "Roger, element maintain position. Weapons free if aggressive",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0212_radio.wav",
+    "text": "Visual on two bandits, formation spread, altitude 16,000 feet",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0213_radio.wav",
+    "text": "Stay alert. Strike package, bandits inbound from starboard flank",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0214_radio.wav",
+    "text": "Lead, threat at ten miles, closing. Request permission to engage",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0215_radio.wav",
+    "text": "Engage on my mark. Weapons free at nine miles",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0216_radio.wav",
+    "text": "Copy, standing by",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0217.wav",
+    "text": "Flight, target splashed, no further bandits detected in sector",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0218_radio.wav",
+    "text": "Visual confirmation, bandits down. Continuing escort",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0219.wav",
+    "text": "Acknowledged. Initiating defensive pattern",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0220.wav",
+    "text": "Copy Lead. Adjusting station accordingly",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0221_radio.wav",
+    "text": "Roger. Proceeding with identification",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0222_radio.wav",
+    "text": "Copy Lead. Adjusting altitude as authorized",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0223_radio.wav",
+    "text": "Red Flight, this is Lead. Radio check, over",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0224.wav",
+    "text": "Lead, this is Wingman. Reading you loud and clear, five by five",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0225.wav",
+    "text": "Copy Wingman. Proceed with formation",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0226_radio.wav",
+    "text": "Wingman, report your position",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0227_radio.wav",
+    "text": "Lead, visual right, 500 feet, two aircraft lengths",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0228.wav",
+    "text": "Copy, maintain station",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0229_radio.wav",
+    "text": "Flight, commence combat spread formation, spacing 500 feet",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0230.wav",
+    "text": "Roger, commencing combat spread",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0231_radio.wav",
+    "text": "Lead, bogey at 3 o’clock, 12 miles, altitude 18,000 feet",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0232.wav",
+    "text": "Copy bogey report. Flight, maintain alert posture",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0233_radio.wav",
+    "text": "Wingman, move right three hundred, join right echelon",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0234.wav",
+    "text": "Roger, moving right three hundred, joining right echelon",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0235_radio.wav",
+    "text": "Flight, bandit on tail, break left, max power",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0236.wav",
+    "text": "Copy break left, max power",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0237.wav",
+    "text": "Stay visual, cover six",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0238.wav",
+    "text": "Bandit on tail",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0239_radio.wav",
+    "text": "Copy, tightening formation to two hundred feet",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0240_radio.wav",
+    "text": "Flight, left turn, heading 270 degrees, rate three turn",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0241.wav",
+    "text": "Left turn heading 270, rate three, copy",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0242_radio.wav",
+    "text": "Flight, climb to twenty thousand feet, maintain speed",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0243_radio.wav",
+    "text": "Climbing to twenty thousand",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0244.wav",
+    "text": "Flight, descend to fifteen thousand feet, prepare for waypoint Charlie",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0245.wav",
+    "text": "Descending to fifteen thousand",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0246_radio.wav",
+    "text": "Copy, Wingman. Monitor fuel closely and advise if below 4,000 pounds",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0247_radio.wav",
+    "text": "Tanker, this is Red Lead, request pre-contact checks",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0248.wav",
+    "text": "Red Lead, pre-contact checks complete, instructions standing by",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0249.wav",
+    "text": "Roger, fuel state at 3,200 pounds, requesting refuel as soon as possible",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0250.wav",
+    "text": "Roger that, Lead. Monitoring fuel state",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0251_radio.wav",
+    "text": "Copy, reducing speed to 250 knots",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0252.wav",
+    "text": "Copy, Lead. Terminate escort, RTB underway",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0253.wav",
+    "text": "Roger, will check in with base control",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0254_radio.wav",
+    "text": "Copy Blue Lead, initiating withdrawal. Good hunting",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0255_radio.wav",
+    "text": "Roger, Red Lead",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0256_radio.wav",
+    "text": "Copy, Lead. Escort terminated. Resuming independent ops",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0257.wav",
+    "text": "Red Lead, copy. RTB safe. Advise when inbound",
+    "voice": "en-GB-RyanNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0258_radio.wav",
+    "text": "Will do, Base",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0259.wav",
+    "text": "Wingman, lost visual. Check lights and radar. Report position",
+    "voice": "en-AU-NatashaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0260_radio.wav",
+    "text": "Copy. Move left two hundred, rejoin formation at visual",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0261_radio.wav",
+    "text": "Lead, missile launch, nine o’clock low!",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0262.wav",
+    "text": "Break left, max power, countermeasures deploy!",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0263_radio.wav",
+    "text": "Breaking left, deploying chaff and flares!",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0264_radio.wav",
+    "text": "Lead, hydraulic failure. Losing control on right aileron",
+    "voice": "en-US-GuyNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0265.wav",
+    "text": "Copy Wingman. Declare emergency with base, advise intentions",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0266_radio.wav",
+    "text": "Roger, declaring emergency. RTB for immediate landing",
+    "voice": "en-AU-WilliamNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0267.wav",
+    "text": "Wingman, confirm comms status",
+    "voice": "en-US-GuyNeural",
+    "degraded": false
+  },
+  {
+    "audio": "audio/0268_radio.wav",
+    "text": "Lead, radio outage. No transmit or receive",
+    "voice": "en-US-AriaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0269_radio.wav",
+    "text": "Flight, threat bandit at five o’clock low, distance seven miles",
+    "voice": "en-GB-RyanNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0270_radio.wav",
+    "text": "Copy contact. Weapons tight, maintain cover position",
+    "voice": "en-GB-SoniaNeural",
+    "degraded": true
+  },
+  {
+    "audio": "audio/0271.wav",
+    "text": "Prepare defensive maneuvers, stay in visual on package",
+    "voice": "en-US-AriaNeural",
+    "degraded": false
+  }
+]

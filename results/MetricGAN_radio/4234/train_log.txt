@@ -1,0 +1,14 @@
+Epoch: 1 - train loss: 1.03e-01 - valid SI-SNR: 9.32, valid pesq: 2.48, valid stoi: 8.29e-01
+Epoch: 2 - train loss: 1.27e-01 - valid SI-SNR: 11.80, valid pesq: 2.60, valid stoi: 8.24e-01
+Epoch: 3 - train loss: 1.16e-01 - valid SI-SNR: 12.08, valid pesq: 2.61, valid stoi: 8.20e-01
+Epoch: 4 - train loss: 1.25e-01 - valid SI-SNR: 12.01, valid pesq: 2.63, valid stoi: 8.16e-01
+Epoch: 5 - train loss: 1.19e-01 - valid SI-SNR: 12.14, valid pesq: 2.60, valid stoi: 8.18e-01
+Epoch: 6 - train loss: 1.31e-01 - valid SI-SNR: 13.11, valid pesq: 2.62, valid stoi: 8.18e-01
+Epoch: 7 - train loss: 1.71e-01 - valid SI-SNR: 13.35, valid pesq: 2.62, valid stoi: 8.20e-01
+Epoch: 8 - train loss: 1.07e-01 - valid SI-SNR: 13.19, valid pesq: 2.61, valid stoi: 8.17e-01
+Epoch: 9 - train loss: 1.51e-01 - valid SI-SNR: 13.99, valid pesq: 2.62, valid stoi: 8.21e-01
+Epoch: 10 - train loss: 1.44e-01 - valid SI-SNR: 13.17, valid pesq: 2.61, valid stoi: 8.15e-01
+Epoch: 11 - train loss: 1.16e-01 - valid SI-SNR: 11.14, valid pesq: 2.54, valid stoi: 8.00e-01
+Epoch: 12 - train loss: 1.51e-01 - valid SI-SNR: 14.15, valid pesq: 2.61, valid stoi: 8.24e-01
+Epoch: 13 - train loss: 1.05e-01 - valid SI-SNR: 9.35, valid pesq: 2.47, valid stoi: 7.79e-01
+Epoch: 14 - train loss: 1.62e-01 - valid SI-SNR: 12.91, valid pesq: 2.59, valid stoi: 8.15e-01
