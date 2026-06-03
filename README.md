@@ -131,7 +131,7 @@ Sortie JSON horodatée + TXT + WAV nettoyé
 
 | Document | Contenu |
 |----------|---------|
-| `CLAUDE.md` | Architecture complète, toutes les expériences, conclusions détaillées |
+| `DOCUMENTATION_PROJET.md` | Architecture complète, toutes les expériences, conclusions détaillées |
 | `docs/Rapport_Transcription_ASR_TFE.docx` | Rapport scientifique ASR (9 sections, formules, résultats) |
 | `docs/SGMSE_Documentation.docx` | Documentation technique SGMSE+ (architecture, SDE, fine-tuning) |
 | `docs/Documentation_Transcription_ASR.docx` | Documentation technique transcription |
@@ -166,5 +166,5 @@ Sortie JSON horodatée + TXT + WAV nettoyé
 
 ---
 
-*Documentation détaillée dans `CLAUDE.md` — contient l'historique complet des expériences,
+*Documentation détaillée dans `DOCUMENTATION_PROJET.md` — contient l'historique complet des expériences,
 les paramètres de chaque modèle, et les enseignements architecturaux.*
